@@ -14,14 +14,13 @@ import { PostService } from 'src/app/_Services/post.service';
 export class PostDetailedViewComponent implements OnInit, AfterViewInit {
   post$!: Observable<IPost | undefined>;
   editing: boolean = false;
-
+  toBeupdatedPost!: IPost;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
     public auth: AuthService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.getPost();
@@ -48,12 +47,15 @@ export class PostDetailedViewComponent implements OnInit, AfterViewInit {
   getPost(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.post$ = this.postService.getPostDoc(id);
+    this.postService.getPostDoc(id).subscribe((post) => {
+      this.toBeupdatedPost = post!;
+    });
   }
 
-  updatePost(post: IPost) {
+  updatePost() {
     const formData = {
-      title: post.title,
-      content: post.content,
+      title: this.toBeupdatedPost.title,
+      content: this.toBeupdatedPost.content,
     };
     const id = this.route.snapshot.paramMap.get('id')!;
     this.postService.updatePost(formData, id);

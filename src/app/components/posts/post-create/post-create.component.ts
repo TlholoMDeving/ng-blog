@@ -49,6 +49,7 @@ export class PostCreateComponent implements OnInit {
       views: []
     } as IPost;
     this.postService.createPost(postData);
+    console.log('test', this.postService)
     this.title = '';
     this.content = '';
     this.image = '';

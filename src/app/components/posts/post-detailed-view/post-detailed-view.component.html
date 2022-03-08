@@ -6,7 +6,7 @@
         <input
           matInput
           placeholder="Post title"
-          [(ngModel)]="post.title"
+          [(ngModel)]="this.toBeupdatedPost.title"
           name="title"
         />
       </mat-form-field>
@@ -15,13 +15,13 @@
         <textarea
           matInput
           placeholder="Post content"
-          [(ngModel)]="post.content"
+          [(ngModel)]="this.toBeupdatedPost.content"
           name="content"
           rows="10"
         ></textarea>
       </mat-form-field>
       <br />
-      <button mat-raised-button (click)="updatePost(post)" color="accent">
+      <button mat-raised-button (click)="updatePost()" color="accent">
         Save
       </button>
       <button mat-button (click)="editing = false" *ngIf="editing">
