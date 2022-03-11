@@ -16,11 +16,13 @@ export class PostCreateComponent implements OnInit {
   content!: string;
   image!: string;
   title!: string;
+  tags!: string[];
 
   saving = 'Create Post';
 
   uploadPercent!: Observable<number | undefined>;
   currentUser!: User | null;
+
   constructor(
     private auth: AuthService,
     private postService: PostService,
@@ -28,7 +30,7 @@ export class PostCreateComponent implements OnInit {
   ) {
     if (this.auth.authenticated) {
       this.auth.currentUser$.subscribe((currentUser) => {
-        this.currentUser = currentUser
+        this.currentUser = currentUser;
       });
     }
   }
@@ -36,7 +38,7 @@ export class PostCreateComponent implements OnInit {
   ngOnInit() {}
 
   createPost() {
-    if(!this.currentUser) return;
+    if (!this.currentUser) return;
     const postData = {
       author: this.currentUser!.displayName || this.currentUser!.email,
       authorId: this.currentUser.uid,
@@ -46,10 +48,11 @@ export class PostCreateComponent implements OnInit {
       title: this.title,
       likes: [],
       dislikes: [],
-      views: []
+      views: [],
+      tags: this.tags,
     } as IPost;
     this.postService.createPost(postData);
-    console.log('test', this.postService)
+    console.log('test', this.postService);
     this.title = '';
     this.content = '';
     this.image = '';
@@ -87,5 +90,10 @@ export class PostCreateComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  getUpdatedTags($event: string[])
+  {
+    this.tags = $event;
   }
 }

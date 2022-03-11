@@ -58,6 +58,10 @@
         </div>
         <br />
         <div class="row">
+          <app-add-tags (tagsChangeEvent)="getUpdatedTags($event)"></app-add-tags>
+        </div>
+        <br />
+        <div class="row">
           <button
             mat-raised-button
             (click)="createPost()"

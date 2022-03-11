@@ -11,4 +11,5 @@ export interface IPost {
   views: String[];
   likes: string[];
   dislikes: string[];
+  tags: string[]
 }

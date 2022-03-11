@@ -22,6 +22,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from "@angular/fire/auth";
 import { provideStorage, getStorage } from "@angular/fire/storage";
 import { AngularFireModule } from '@angular/fire/compat';
+import { AddTagsComponent } from './components/add-tags/add-tags.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     PostCreateComponent,
     SignupComponent,
     LoginEmailComponent,
+    AddTagsComponent
   ],
   imports: [
     BrowserModule,
